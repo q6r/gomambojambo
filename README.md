@@ -1,0 +1,2 @@
+# gomambojambo
+Golang AST Obfuscation
