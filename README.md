@@ -52,101 +52,91 @@ import (
 	"fmt"
 )
 
-func ijolxvfogwskcjuvdgffytwzmukemrsm(a int) []int {
+func feezjurstezwlipfhqotmvrfljwgclpj(a int) []int {
 	m := []int{}
 	{
-		goto LOOP_INIT_mmohmb
-	LOOP_INIT_mmohmb:
+		goto LOOP_INIT_fzjcph
+	LOOP_INIT_fzjcph:
 		;
 		i := 0
-		goto LOOP_COND_excfyj
-	LOOP_COND_excfyj:
+		goto LOOP_COND_nlvrpf
+	LOOP_COND_nlvrpf:
 		if i < a {
-			goto LOOP_BODY_gxiifn
+			goto LOOP_BODY_mzoord
 		} else {
-			goto LOOP_END_nxxdqv
+			goto LOOP_END_kndsac
 		}
-	LOOP_BODY_gxiifn:
+	LOOP_BODY_mzoord:
 		{
 			{
-				goto LOOP_INIT_nnnjjc
-			LOOP_INIT_nnnjjc:
+				goto LOOP_INIT_icketl
+			LOOP_INIT_icketl:
 				;
 				j := 0
-				goto LOOP_COND_huckdb
-			LOOP_COND_huckdb:
+				goto LOOP_COND_gzqnmc
+			LOOP_COND_gzqnmc:
 				if j < i {
-					goto LOOP_BODY_cssbty
+					goto LOOP_BODY_udzevk
 				} else {
-					goto LOOP_END_rcwqup
+					goto LOOP_END_pmovmj
 				}
-			LOOP_BODY_cssbty:
+			LOOP_BODY_udzevk:
 				{
 					m = append(m, i+j)
 					j++
-					goto LOOP_COND_huckdb
+					goto LOOP_COND_gzqnmc
 
 				}
-			LOOP_END_rcwqup:
+			LOOP_END_pmovmj:
 				{
 				}
 			}
 			i++
-			goto LOOP_COND_excfyj
+			goto LOOP_COND_nlvrpf
 
 		}
-	LOOP_END_nxxdqv:
+	LOOP_END_kndsac:
 		{
 		}
 	}
 	return m
 }
 
-func Lenirdftvvrgwesqohuiucnfhyaehjkj(s string) string {
-	key, _ := hex.DecodeString("0101010101010101010101010101010101010101010101010101010101010101")
-	ciphertext, _ := hex.DecodeString(s)
-	nonce, _ := hex.DecodeString("010101010101010101010101")
-	block, err := aes.NewCipher(key)
-	if err != nil {
-		panic(err.Error())
-	}
-	aesgcm, err := cipher.NewGCM(block)
-	if err != nil {
-		panic(err.Error())
-	}
-	plaintext, err := aesgcm.Open(nil, nonce, ciphertext, nil)
-	if err != nil {
-		panic(err.Error())
-	}
-	return string(plaintext)
-}
-
 func main() {
-	v := ijolxvfogwskcjuvdgffytwzmukemrsm(10)
+	v := feezjurstezwlipfhqotmvrfljwgclpj(10)
 	sum := 0
 	{
-		goto LOOP_INIT_gmayxh
-	LOOP_INIT_gmayxh:
+		goto LOOP_INIT_eiubku
+	LOOP_INIT_eiubku:
 		;
 		i := 0
-		goto LOOP_COND_bzkbgj
-	LOOP_COND_bzkbgj:
+		goto LOOP_COND_htnuhc
+	LOOP_COND_htnuhc:
 		if i < len(v) {
-			goto LOOP_BODY_mezrxh
+			goto LOOP_BODY_ptqcvi
 		} else {
-			goto LOOP_END_oxyyzr
+			goto LOOP_END_igzdqm
 		}
-	LOOP_BODY_mezrxh:
+	LOOP_BODY_ptqcvi:
 		{
 			sum += v[i]
 			i++
-			goto LOOP_COND_bzkbgj
+			goto LOOP_COND_htnuhc
+
 		}
-	LOOP_END_oxyyzr:
+	LOOP_END_igzdqm:
 		{
 		}
 	}
-	fmt.Printf(Lenirdftvvrgwesqohuiucnfhyaehjkj("c10cd7ba54d720d09cf961814f1b2581161731150c24cf37a7b0b3"), sum)
+	fmt.Printf((func(s string) string {
+		k, _ := hex.DecodeString("0101010101010101010101010101010101010101010101010101010101010101")
+		ct, _ := hex.DecodeString(s)
+		n, _ := hex.DecodeString("010101010101010101010101")
+		b, _ := aes.NewCipher(k)
+		g, _ := cipher.NewGCM(b)
+		pt, _ := g.Open(nil, n, ct, nil)
+		return string(pt)
+	})("c10cd7ba54d720d09caf9b82f4bbc522f575d548fe59730764cb"), sum)
 }
 ```
 
