@@ -1,9 +1,7 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"math/rand"
 	"os"
@@ -13,8 +11,8 @@ import (
 
 	"flag"
 	"go/ast"
-	"go/format"
 	"go/parser"
+	"go/printer"
 	"go/token"
 )
 
@@ -103,13 +101,20 @@ func main() {
 	// Show/Write changes
 	for _, pkg := range pkgs {
 		for file, fileast := range pkg.Files {
-			buf := new(bytes.Buffer)
-			if err := format.Node(buf, fset, fileast); err != nil {
+			err := printer.Fprint(os.Stdout, fset, fileast)
+			if err != nil {
 				panic(err)
 			}
-			log.Printf("%s\n", buf.Bytes())
+
 			if *writeChanges {
-				ioutil.WriteFile(file, buf.Bytes(), 0644)
+				fd, err := os.OpenFile(file, os.O_WRONLY, 0644)
+				if err != nil {
+					panic(err)
+				}
+				err = printer.Fprint(fd, fset, fileast)
+				if err != nil {
+					panic(err)
+				}
 			}
 		}
 	}
