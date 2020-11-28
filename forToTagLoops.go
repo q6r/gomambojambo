@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"go/ast"
 	"go/token"
-	"log"
+
+	log "github.com/sirupsen/logrus"
 
 	"golang.org/x/tools/go/ast/astutil"
 )
@@ -34,14 +35,14 @@ func convertTopLevelFunctionsBodiesLoops(pkgName string, fileAst *ast.File, chan
 		cond := stmtType.Cond
 		post := stmtType.Post
 		body := stmtType.Body
-		log.Printf("\tStmt.Init = %#v\n", init)
-		log.Printf("\tStmt.Cond = %#v\n", cond)
-		log.Printf("\tStmt.Post = %#v\n", post)
-		log.Printf("\tStmt.Body = %#v\n", body)
 
 		// We only support IfStmt with full params (init,cond,post, and body)
 		if init == nil || cond == nil || post == nil || body == nil {
 			return true
+		}
+
+		if *verbose {
+			log.Printf("For loop detected (init=%v, cond=%v, post=%v, body=%v)", init, cond, post, body)
 		}
 
 		loopInitIdent := ast.NewIdent(fmt.Sprintf("LOOP_INIT_%s", randStringRunes(6)))
@@ -49,8 +50,9 @@ func convertTopLevelFunctionsBodiesLoops(pkgName string, fileAst *ast.File, chan
 		loopBodyIdent := ast.NewIdent(fmt.Sprintf("LOOP_BODY_%s", randStringRunes(6)))
 		loopEndIdent := ast.NewIdent(fmt.Sprintf("LOOP_END_%s", randStringRunes(6)))
 
-		// Convert `break` in body to `goto loopEndIdent` since after obfuscation
-		// it'll be illegal to use `break` outside loop.
+		// Convert `break` in body to `goto loopEndIdent` since
+		// after obfuscation it'll be illegal to use `break`
+		// outside loop.
 		astutil.Apply(body, func(crn *astutil.Cursor) bool {
 			branch, ok := crn.Node().(*ast.BranchStmt)
 			if !ok {
@@ -62,7 +64,8 @@ func convertTopLevelFunctionsBodiesLoops(pkgName string, fileAst *ast.File, chan
 					Label: loopEndIdent,
 				})
 			}
-			return true // continue might find more breaks in the body
+			// continue might find more breaks in the body
+			return true
 		}, nil)
 
 		body.List = append(body.List, post,

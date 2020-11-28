@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"go/ast"
 	"go/token"
-	"log"
 	"math/rand"
 	"strings"
 	"unicode"
@@ -40,13 +39,13 @@ func newRandomizeInner(pkgName string, fileAst *ast.File, changeHistory map[stri
 		if !ok {
 			return true
 		}
-		log.Printf("CallExpr = %#v\n", callExpr.Fun)
 
 		switch fun := callExpr.Fun.(type) {
 		case *ast.SelectorExpr:
 			ident, ok := fun.X.(*ast.Ident)
 			if ok {
 				if rname, ok := changeHistory[fmt.Sprintf("%s.%s", ident.Name, fun.Sel.Name)]; ok {
+
 					fun.Sel = ast.NewIdent(rname)
 				}
 			}

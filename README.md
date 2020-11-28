@@ -1,16 +1,13 @@
 # gomambojambo
 
-Golang AST Obfuscation. The idea is to give it a package path, and it will
-obfuscate the AST and write it back. This is just a toy project to experiment
-with Golang AST.
-
-Currently it does the following :
+AST-based obfuscation. The idea is to give it a package path, and it will obfuscate it.
 
 - Randomization of function names, and function calls
 - For loops converted to goto with tags
 - Strings obfuscated/encrypted using AES
+- Adding some deadcode to functions
 
-Example given the following source code :
+Given the following source code :
 
 ```
 package main
@@ -40,9 +37,11 @@ func main() {
 
 ```
 
-Will be obfuscated to
+Will be obfuscated to :
+
 
 ```
+
 package main
 
 import (
@@ -52,92 +51,263 @@ import (
 	"fmt"
 )
 
-func feezjurstezwlipfhqotmvrfljwgclpj(a int) []int {
+func xhrandgrmayhrxnwbvksrglqqgzxtbwc(a int) []int {
+	(func() {
+		zXXX := int64(6)
+		sXXX := float64(4)
+		{
+			goto LOOP_INIT_fskwhl
+		LOOP_INIT_fskwhl:
+			;
+			iXXX := 8
+			goto LOOP_COND_ybznsy
+		LOOP_COND_ybznsy:
+			if iXXX < 15 {
+				goto LOOP_BODY_oecdzt
+			} else {
+				goto LOOP_END_jcqmbc
+			}
+		LOOP_BODY_oecdzt:
+			{
+				{
+					goto LOOP_INIT_ydlebm
+				LOOP_INIT_ydlebm:
+					;
+					jXXX := iXXX
+					goto LOOP_COND_zpxcxd
+				LOOP_COND_zpxcxd:
+					if jXXX <
+						15 {
+						goto LOOP_BODY_ibbxcs
+					} else {
+						goto LOOP_END_dhpwmq
+					}
+				LOOP_BODY_ibbxcs:
+					{
+						{
+							goto LOOP_INIT_gqlrlm
+						LOOP_INIT_gqlrlm:
+							;
+
+							zXXX := jXXX
+							goto LOOP_COND_zbipfd
+						LOOP_COND_zbipfd:
+							if zXXX < 15 {
+								goto LOOP_BODY_uwodsb
+							} else {
+								goto LOOP_END_kwjqls
+							}
+						LOOP_BODY_uwodsb:
+							{
+								sXXX = (float64(iXXX+jXXX) *
+									float64(zXXX)) /
+									float64(iXXX)
+								zXXX++
+								goto LOOP_COND_zbipfd
+
+							}
+						LOOP_END_kwjqls:
+							{
+							}
+						}
+						jXXX++
+						goto LOOP_COND_zpxcxd
+
+					}
+				LOOP_END_dhpwmq:
+					{
+					}
+				}
+				iXXX++
+				goto LOOP_COND_ybznsy
+
+			}
+		LOOP_END_jcqmbc:
+			{
+			}
+		}
+		if sXXX == float64(zXXX) {
+		}
+	})()
+
 	m := []int{}
 	{
-		goto LOOP_INIT_fzjcph
-	LOOP_INIT_fzjcph:
+		goto LOOP_INIT_rtnfaj
+	LOOP_INIT_rtnfaj:
 		;
 		i := 0
-		goto LOOP_COND_nlvrpf
-	LOOP_COND_nlvrpf:
+		goto LOOP_COND_rdmjei
+	LOOP_COND_rdmjei:
 		if i < a {
-			goto LOOP_BODY_mzoord
+			goto LOOP_BODY_ggnsph
 		} else {
-			goto LOOP_END_kndsac
+			goto LOOP_END_hokgpq
 		}
-	LOOP_BODY_mzoord:
+	LOOP_BODY_ggnsph:
 		{
 			{
-				goto LOOP_INIT_icketl
-			LOOP_INIT_icketl:
+				goto LOOP_INIT_fkrzea
+			LOOP_INIT_fkrzea:
 				;
 				j := 0
-				goto LOOP_COND_gzqnmc
-			LOOP_COND_gzqnmc:
+				goto LOOP_COND_wlwypq
+			LOOP_COND_wlwypq:
 				if j < i {
-					goto LOOP_BODY_udzevk
+					goto LOOP_BODY_pmzmun
 				} else {
-					goto LOOP_END_pmovmj
+					goto LOOP_END_vbqtik
 				}
-			LOOP_BODY_udzevk:
+			LOOP_BODY_pmzmun:
 				{
 					m = append(m, i+j)
 					j++
-					goto LOOP_COND_gzqnmc
+					goto LOOP_COND_wlwypq
 
 				}
-			LOOP_END_pmovmj:
+			LOOP_END_vbqtik:
 				{
 				}
 			}
 			i++
-			goto LOOP_COND_nlvrpf
+			goto LOOP_COND_rdmjei
 
 		}
-	LOOP_END_kndsac:
+	LOOP_END_hokgpq:
 		{
 		}
 	}
 	return m
 }
+func Yrqeewbyhgvzpcnktemimipehaipmukk(
+	s string) string {
+	key, _ :=
+		hex.DecodeString("0101010101010101010101010101010101010101010101010101010101010101")
+	ciphertext,
+
+		_ := hex.
+		DecodeString(s)
+	nonce, _ := hex.DecodeString("010101010101010101010101")
+	block, err :=
+		aes.
+			NewCipher(key)
+	if err != nil {
+		panic(err.Error())
+	}
+	aesgcm, err := cipher.NewGCM(block)
+	if err != nil {
+		panic(err.Error())
+	}
+	plaintext, err := aesgcm.Open(nil, nonce, ciphertext, nil)
+	if err != nil {
+		panic(err.Error())
+	}
+	return string(plaintext)
+}
 
 func main() {
-	v := feezjurstezwlipfhqotmvrfljwgclpj(10)
+	(func() {
+		zXXX := int64(6)
+		sXXX := float64(4)
+		{
+			goto LOOP_INIT_fskwhl
+		LOOP_INIT_fskwhl:
+			;
+			iXXX := 8
+			goto LOOP_COND_ybznsy
+		LOOP_COND_ybznsy:
+			if iXXX < 15 {
+				goto LOOP_BODY_oecdzt
+			} else {
+				goto LOOP_END_jcqmbc
+			}
+		LOOP_BODY_oecdzt:
+			{
+				{
+					goto LOOP_INIT_ydlebm
+				LOOP_INIT_ydlebm:
+					;
+					jXXX := iXXX
+					goto LOOP_COND_zpxcxd
+				LOOP_COND_zpxcxd:
+					if jXXX <
+						15 {
+						goto LOOP_BODY_ibbxcs
+					} else {
+						goto LOOP_END_dhpwmq
+					}
+				LOOP_BODY_ibbxcs:
+					{
+						{
+							goto LOOP_INIT_gqlrlm
+						LOOP_INIT_gqlrlm:
+							;
+
+							zXXX := jXXX
+							goto LOOP_COND_zbipfd
+						LOOP_COND_zbipfd:
+							if zXXX < 15 {
+								goto LOOP_BODY_uwodsb
+							} else {
+								goto LOOP_END_kwjqls
+							}
+						LOOP_BODY_uwodsb:
+							{
+								sXXX = (float64(iXXX+jXXX) *
+									float64(zXXX)) /
+									float64(iXXX)
+								zXXX++
+								goto LOOP_COND_zbipfd
+
+							}
+						LOOP_END_kwjqls:
+							{
+							}
+						}
+						jXXX++
+						goto LOOP_COND_zpxcxd
+
+					}
+				LOOP_END_dhpwmq:
+					{
+					}
+				}
+				iXXX++
+				goto LOOP_COND_ybznsy
+
+			}
+		LOOP_END_jcqmbc:
+			{
+			}
+		}
+		if sXXX == float64(zXXX) {
+		}
+	})()
+
+	v := xhrandgrmayhrxnwbvksrglqqgzxtbwc(10)
 	sum := 0
 	{
-		goto LOOP_INIT_eiubku
-	LOOP_INIT_eiubku:
+		goto LOOP_INIT_dbcywi
+	LOOP_INIT_dbcywi:
 		;
 		i := 0
-		goto LOOP_COND_htnuhc
-	LOOP_COND_htnuhc:
+		goto LOOP_COND_vxrvig
+	LOOP_COND_vxrvig:
 		if i < len(v) {
-			goto LOOP_BODY_ptqcvi
+			goto LOOP_BODY_wmptnj
 		} else {
-			goto LOOP_END_igzdqm
+			goto LOOP_END_bscqrq
 		}
-	LOOP_BODY_ptqcvi:
+	LOOP_BODY_wmptnj:
 		{
 			sum += v[i]
 			i++
-			goto LOOP_COND_htnuhc
+			goto LOOP_COND_vxrvig
 
 		}
-	LOOP_END_igzdqm:
+	LOOP_END_bscqrq:
 		{
 		}
 	}
-	fmt.Printf((func(s string) string {
-		k, _ := hex.DecodeString("0101010101010101010101010101010101010101010101010101010101010101")
-		ct, _ := hex.DecodeString(s)
-		n, _ := hex.DecodeString("010101010101010101010101")
-		b, _ := aes.NewCipher(k)
-		g, _ := cipher.NewGCM(b)
-		pt, _ := g.Open(nil, n, ct, nil)
-		return string(pt)
-	})("c10cd7ba54d720d09caf9b82f4bbc522f575d548fe59730764cb"), sum)
+	fmt.Printf(Yrqeewbyhgvzpcnktemimipehaipmukk("c10cd7ba54d720d09caf9b82f4bbc522f575d548fe59730764cb"), sum)
 }
 ```
-
-run with `./gomambojambo -calls -loops -strings -writechanges -srcpath mycode/` and `-h` for help.
